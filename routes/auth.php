@@ -8,6 +8,7 @@ use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
+use App\Http\Controllers\BlogController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function () {
@@ -53,4 +54,16 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+    //show posts
+    route::get('/blog-list', [BlogController::class, 'show'])->name('blog.index');
+    //add post
+    Route::get('/blog-add', [BlogController::class, 'create'])->name('blog.add');
+    Route::post('/blog-add', [BlogController::class, 'store']);
+    //edit post
+    Route::get('/blog-edit/{blog}', [BlogController::class, 'edit'])->name('blog.edit');
+    Route::post('/blog-edit/{blog}', [BlogController::class, 'update'])->name('blog.update');
+    //delete post
+    Route::post('/blog-delete/{blog}', [BlogController::class, 'destroy'])->name('blog.delete');
+    
+    
 });

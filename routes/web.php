@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\MapController;
+use App\Http\Controllers\WeatherApiController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -23,6 +26,10 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
+Route::get('/weather', [WeatherApiController::class, 'index']);
+Route::get('/map', [MapController::class, 'index']);
+Route::get('/blog', [BlogController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
