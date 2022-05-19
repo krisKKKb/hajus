@@ -27,6 +27,16 @@ import { ref } from "vue";
   * HINT:: php artisan make:model MinuModeliNimi -mcr ( m - lisab migration faili, c - lisab kontrolleri faili, r - täidab kontrolleri tühjade CRUD funktsioonidega )
 */
 
+// const route võimaldab lisada web.php's olevaid route, name() parameetri alusel. 
+const route = inject('route')
+/* 
+Näide: 
+Web.php route: Route::get('/map', [MapController::class, 'index'])->name('map.index');
+Vue's kasutame seda nii: route('map.index') siis ei pea url'i välja kirjutama
+
+*/
+
+
 // Kontrollerist saadetud andmed (props) !NB jälgi et sisse tuleva data "key" oleks markers.
 const props = defineProps({
   markers: {
