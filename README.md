@@ -1,4 +1,4 @@
-#API https://github.com/JustKevinR/redditAI
+# API https://github.com/JustKevinR/redditAI
 
 # Kirjeldus
 Kõik ülesanded võib lahendada eraldi või ühe tervikliku projektina.
