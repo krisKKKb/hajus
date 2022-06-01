@@ -1,8 +1,9 @@
 <?php
 
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\MapController;
-use App\Http\Controllers\WeatherApiController;
+use App\Http\Controllers\MarkerController;
+use App\Http\Controllers\WeatherController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -27,12 +28,23 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/weather', [WeatherApiController::class, 'index']);
-Route::get('/map', [MapController::class, 'index']);
+Route::get('/weather', [WeatherController::class, 'weather']);
 Route::get('/blog', [BlogController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/store', [StoreController::class, 'index'])->name('store');
+Route::post('/cart', [StoreController::class, 'cartAdd'])->name('add.cart');
+Route::get('/cart', [StoreController::class, 'CartList'])->name('cart.list');
+Route::put('/cart/{id}', [StoreController::class, 'updateCart'])->name('update.cart');
+Route::delete('/cart/{id}', [StoreController::class, 'destroy'])->name('delete.cart');
+
+Route::delete('/googlemaps/{id}', [MarkerController::class, 'delete']);
+Route::get('/googlemaps', [MarkerController::class, 'index']);
+Route::post('/googlemaps', [MarkerController::class, 'store']);
+Route::get('/googlemaps/marker/{id}', [MarkerController::class, 'show']);
+Route::post('/googlemaps/marker/{id}', [MarkerController::class, 'update'])->name("marker.edit");
 
 require __DIR__.'/auth.php';

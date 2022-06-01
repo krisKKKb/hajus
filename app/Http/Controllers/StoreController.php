@@ -1,0 +1,67 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Http;
+use App\Models\Store;
+use Inertia\Inertia;
+use Validator;
+
+class StoreController extends Controller
+{
+  public function index()
+  {
+    // $data = Http::get("https://epood.ta19heinsoo.itmajakas.ee/api/hajus");
+    // return $data;
+    // $realData = array();
+    return Inertia::render('Store');
+  }
+  public function cartList()
+  {
+    $data = session()->get('cart');
+    return Inertia::render('Cart', [
+      'data' => $data
+    ]);
+  }
+  public function cartCount()
+  {
+    $data = session()->get('cart');
+  }
+  public function cartAdd(Request $request)
+  {
+    $product = $request->all();
+    $validator = Validator::make($request->all(), [
+      'qty' => 'required|numeric|gt:0'
+    ])->passes();
+    $qty = $validator ? $request->qty : 1;
+    $product['qty'] = $qty;
+    if (session()->has("cart." . $product['id'])) {
+      $cart_product = session('cart.' . $product['id'], $product);
+      // return $cart_product;
+      $cart_product['qty'] += $qty;
+      session()->put('cart.' . $product['id'], $cart_product);
+    } else {
+      session()->put('cart.' . $product['id'], $product);
+    }
+    return redirect()->back();
+  }
+  public function cartUpdate(Request $request)
+  {
+    $product = $request->all();
+    $validator = Validator::make($request->all(), [
+      'qty' => 'required|numeric|gt:0'
+    ])->passes();
+    if (session()->has('cart.' . $product['id']) && $validator) {
+      $cart_product = session('cart.' . $product['id'], $product);
+      $cart_product['qty'] += $request['qty'];
+      session()->put('cart.' . $product['id'], $cart_product);
+    }
+    return redirect()->back();
+  }
+  public function destroy($id)
+  {
+    session()->forget('cart.' . $id);
+    return redirect()->back();
+  }
+}
