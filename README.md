@@ -1,3 +1,5 @@
+#API https://github.com/JustKevinR/redditAI
+
 # Kirjeldus
 Kõik ülesanded võib lahendada eraldi või ühe tervikliku projektina.
 Valmis töö(d) tuleb laadida zone'i ja kood githubi/gitlabi vms.
