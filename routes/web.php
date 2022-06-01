@@ -41,7 +41,7 @@ Route::get('/cart', [StoreController::class, 'CartList'])->name('cart.list');
 Route::put('/cart/{id}', [StoreController::class, 'updateCart'])->name('update.cart');
 Route::delete('/cart/{id}', [StoreController::class, 'destroy'])->name('delete.cart');
 
-Route::delete('/googlemaps/{id}', [MarkerController::class, 'delete']);
+Route::delete('/googlemaps/{id}', [MarkerController::class, 'delete'])->name('marker.delete');
 Route::get('/googlemaps', [MarkerController::class, 'index']);
 Route::post('/googlemaps', [MarkerController::class, 'store']);
 Route::get('/googlemaps/marker/{id}', [MarkerController::class, 'show']);

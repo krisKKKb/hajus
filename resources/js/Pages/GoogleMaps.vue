@@ -1,7 +1,7 @@
 <template>
   <div class="lg:w-7/12 w-full h-96">
     <div class="h-full w-full" id="map" ref="map"></div>
-    <form @submit="$emit('submit', form)">
+    <form @submit="form.post('/googlemaps')">
       <input type="text" v-model="form.name" />
       <input type="text" v-model="form.description" />
       <input type="text" v-model="form.lat" />
@@ -21,37 +21,18 @@
         <td>{{ item.description }}</td>
         <td>{{ item.latitude }}</td>
         <td>{{ item.latitude }}</td>
-        <button @click="$emit('edit', item)" class="btn">Edit</button>
-        <button @click="$emit('delete', item)" class="btn">Delete</button>
+        <a :href="route('marker.edit', item.id)" class="btn">Edit</a>
+        <button @click.prevent="deleteMarker(item.id)" class="btn">Delete</button>
       </tr>
     </table>
   </div>
 </template>
-<script>
-export default {
-  props: { data: JSON },
-  emits: {
-      submit: function (form){
-          console.log("asdf")
-          form.post("/googlemaps");
-          return true
-      },
-      edit:function(data){
-          const dataForm = useForm({id: data.id,})
-          dataForm.get("/googlemaps/marker/" + data.id)
-      },
-      delete: function(data){
-          const dataForm = useForm({id: data.id})
-          dataForm.delete("/googlemaps/" + data.id)
-      }
-  },
-};
-</script>
 <script setup>
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import { Loader } from "@googlemaps/js-api-loader";
 import { inject, ref } from "vue";
 import { defineProps, reactive, defineEmits } from "vue";
+import { Inertia } from '@inertiajs/inertia';
 const route = inject("route");
 const props = defineProps({
   data: String,
@@ -105,4 +86,6 @@ function addMarker(location, map) {
     map: map,
   });
 }
+
+const deleteMarker = (id) => Inertia.delete(route('marker.delete',id))
 </script>
