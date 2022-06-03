@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Blog;
+use App\Models\Comments;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -55,5 +56,10 @@ class BlogController extends Controller
         return Inertia::render('Auth/Blog/Index', [
             'posts' => Blog::all()
         ]);
+    }
+
+    public function deleteComment(Comments $comments){
+        $comments->delete();
+        return redirect()->back();
     }
 }

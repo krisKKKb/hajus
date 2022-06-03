@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\CommentsController;
 use App\Http\Controllers\MarkerController;
 use App\Http\Controllers\WeatherController;
 use App\Http\Controllers\StoreController;
@@ -29,7 +30,11 @@ Route::get('/', function () {
 });
 
 Route::get('/weather', [WeatherController::class, 'weather']);
+
 Route::get('/blog', [BlogController::class, 'index']);
+Route::post('/comments', [CommentsController::class, 'index']);
+Route::post('/comment/{blog}', [CommentsController::class, 'store']);
+Route::post('/comment-delete/{comment}', [CommentsController::class, 'delete'])->middleware('role:Admin');
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
