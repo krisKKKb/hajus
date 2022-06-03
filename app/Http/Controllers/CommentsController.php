@@ -11,6 +11,7 @@ class CommentsController extends Controller
     public function store(Blog $blog, Request $request)
   {
     // return $request;
+
     $blog->comments()->create([
       'comment' => $request->comment,
         

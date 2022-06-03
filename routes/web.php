@@ -52,4 +52,6 @@ Route::post('/googlemaps', [MarkerController::class, 'store']);
 Route::get('/googlemaps/marker/{id}', [MarkerController::class, 'show']);
 Route::post('/googlemaps/marker/{id}', [MarkerController::class, 'update'])->name("marker.edit");
 
+Route::get('/success', [StoreController::class, 'success']);
+
 require __DIR__.'/auth.php';

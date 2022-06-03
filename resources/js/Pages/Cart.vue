@@ -54,7 +54,7 @@
             <span>Total cost</span>
             <span>$600</span>
           </div>
-          <button class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
+          <button @click="redirect" class="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">Checkout</button>
         </div>
       </div>
     </div>
@@ -70,5 +70,30 @@ export default {};
 </script>
 <script setup>
 import { Head } from "@inertiajs/inertia-vue3";
-const props = defineProps({ data: String });
+import {onMounted} from 'vue'
+const props = defineProps({ data: String, cart:String });
+
+
+onMounted(() => {
+    console.log(props.data)
+    console.log(props.cart)
+})
+
+
+let stripe = Stripe("pk_test_51L6WkZIq9fDD08fECxt37reImUcSJtZB9d0DJDB8I1hXyxI9WJwZGmQhPjc7qokb708z9lybRTsjk0Z48Kory12N00IHZnmiK1")
+
+function redirect() {
+    const items = []
+    props.cart.forEach(element => {
+        items.push({price: element.default_price, quantity: parseInt(element.metadata.amount)})
+    });
+    console.log(items)
+    stripe.redirectToCheckout({
+        successUrl: "http://127.0.0.1:8000/success",
+        cancelUrl: "http://127.0.0.1:8000/cart",
+        lineItems: items,
+        mode: "payment"
+    })
+}
+
 </script>

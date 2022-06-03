@@ -8,7 +8,7 @@ defineProps(["data"]);
               <img class="h-24" :src="'https://epood.ta19heinsoo.itmajakas.ee/' + data.image" alt="">
             </div>
             <div class="flex flex-col justify-between ml-4 flex-grow">
-              <span class="font-bold text-sm">{{data.title}}</span>
+              <span class="font-bold text-sm">{{data.title}}</span> 
               <span class="text-red-500 text-xs">{{data.title}}</span>
               <a @click="$emit('deleteItem', data.id)" class="font-semibold hover:text-red-500 text-gray-500 text-xs">Remove</a>
             </div>

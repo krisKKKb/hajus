@@ -20,9 +20,35 @@ class StoreController extends Controller
   public function cartList()
   {
     $data = session()->get('cart');
+    $sendData = array();
+
+
+    if($data){
+
+        $stripe = new \Stripe\StripeClient(env('STRIPE_SK'));
+
+        foreach ($data as $value) {
+
+            $product = $stripe->products->create([
+                'name' => $value["title"],
+                'description' => $value["description"],
+                'images' => ["https://epood.ta19heinsoo.itmajakas.ee/".$value["image"]],
+                'default_price_data' => [
+                    'currency' => 'eur',
+                    'unit_amount' => (int) $value["price"] * 100
+                ],
+                'metadata' => ['amount' => $value['qty']]
+            ]);
+
+            array_push($sendData, $product);
+        }
+    }
+
     return Inertia::render('Cart', [
-      'data' => $data
+        'data' => $data,
+        'cart' => $sendData
     ]);
+
   }
   public function cartCount()
   {
@@ -64,4 +90,11 @@ class StoreController extends Controller
     session()->forget('cart.' . $id);
     return redirect()->back();
   }
+
+  function success(){
+    session()->flush();
+
+    return redirect('/store');
+}
+
 }
