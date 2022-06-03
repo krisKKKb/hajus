@@ -5,20 +5,20 @@ namespace Deployer;
 require 'recipe/laravel.php';
 
 // Project name
-set('application', 'projekti nimi');
-set('remote_user', ''); //virt...
-set('http_user', '');
+set('application', 'hajusrakendused');
+set('remote_user', 'virt83027'); //virt...
+set('http_user', 'virt83027');
 set('keep_releases', 2);
 
 // Hosts
-host('nimi.itmajakas.ee')
-    ->setHostname('nimi.itmajakas.ee')
-    ->set('http_user', '')
-    ->set('deploy_path', '~/domeenid/www.nimi.itmajakas.ee/kataloog')
+host('tak19tammeaid.itmajakas.ee')
+    ->setHostname('tak19tammeaid.itmajakas.ee')
+    ->set('http_user', 'virt83027')
+    ->set('deploy_path', '~/domeenid/www.tak19tammeaid.itmajakas.ee/hajus')
     ->set('branch', 'dev');
 
 // Tasks
-set('repository', 'repo nimi');
+set('repository', 'git@github.com:erkitammeaid/hajused.git');
 //Restart opcache
 task('opcache:clear', function () {
     run('killall php80-cgi || true');
