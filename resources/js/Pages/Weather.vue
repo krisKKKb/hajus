@@ -8,10 +8,6 @@
           <div class="text-2xl">Temperatuur: {{ data.main.temp }}</div>
           <div class="text-2xl">Tundub nagu: {{data.main.feels_like}}</div>
           <div class="text-2xl">Tuule kiirus: {{data.wind.speed}}</div>
-          <div class="text-2xl"></div>
-          <div class="text-2xl"></div>
-          <div class="text-2xl"></div>
-          <div class="text-2xl"></div>
         </div>
       </div>
     </div>
