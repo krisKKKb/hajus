@@ -14,7 +14,7 @@ set('keep_releases', 2);
 host('tak19pyyding.itmajakas.ee')
     ->setHostname('tak19pyyding.itmajakas.ee')
     ->set('http_user', 'virt83023')
-    ->set('deploy_path', '~/domeenid/tak19pyyding.itmajakas.ee/hajused')
+    ->set('deploy_path', '~/domeenid/tak19pyyding.itmajakas.ee/hajus')
     ->set('branch', 'dev');
 
 // Tasks
