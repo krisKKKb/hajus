@@ -11,11 +11,11 @@ set('http_user', 'virt83023');
 set('keep_releases', 2);
 
 // Hosts
-host('tak19ratsep.itmajakas.ee')
+host('tak19pyyding.itmajakas.ee')
     ->setHostname('tak19pyyding.itmajakas.ee')
     ->set('http_user', 'virt83023')
     ->set('deploy_path', '~/domeenid/www.tak19pyyding.itmajakas.ee/hajus')
-    ->set('branch', 'main');
+    ->set('branch', 'dev');
 
 // Tasks
 set('repository', 'git@github.com:fs-s/hajus.git');
