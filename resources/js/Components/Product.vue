@@ -1,4 +1,3 @@
-
 <template>
     <div class="rounded overflow-hidden shadow-lg">
         <img class="w-full" :src="'https://epood.ta19heinsoo.itmajakas.ee/' + image" alt="">
