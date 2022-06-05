@@ -32,6 +32,11 @@ return [
     ],
     'weather' => [
         'key' => env('WEATHER_API_KEY')
-    ]
+    ],
+    'strip' => [
+        'pk' => env("STRIPE_PK"),
+        'sk' => env("STRIPE_SK")
+    ],
+
 
 ];

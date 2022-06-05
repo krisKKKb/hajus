@@ -1,3 +1,4 @@
+
 <template>
   <Head title="E-pood" />
   <NavBar />
@@ -62,6 +63,7 @@ export default {
 import { Head, useForm } from "@inertiajs/inertia-vue3";
 import axios from "axios";
 import { inject, ref } from "vue";
+
 const route = inject("route");
 // console.log(this.route);
 // let qty = ref(1);
