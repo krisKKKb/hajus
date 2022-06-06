@@ -6,19 +6,19 @@ require 'recipe/laravel.php';
 
 // Project name
 set('application', 'hajusrakendused');
-set('remote_user', 'virt83023'); //virt...
-set('http_user', 'virt83023');
+set('remote_user', 'virt83017'); //virt...
+set('http_user', 'virt83017');
 set('keep_releases', 2);
 
 // Hosts
-host('tak19pyyding.itmajakas.ee')
-    ->setHostname('tak19pyyding.itmajakas.ee')
-    ->set('http_user', 'virt83023')
-    ->set('deploy_path', '~/domeenid/www.tak19pyyding.itmajakas.ee/hajus')
+host('tak19burk.itmajakas.ee')
+    ->setHostname('tak19burk.itmajakas.ee')
+    ->set('http_user', 'virt83017')
+    ->set('deploy_path', '~/domeenid/www.tak19burk.itmajakas.ee/hajus')
     ->set('branch', 'dev');
 
 // Tasks
-set('repository', 'git@github.com:fs-s/hajus.git');
+set('repository', 'git@github.com:krisKKKb/hajus.git');
 //Restart opcache
 task('opcache:clear', function () {
     run('killall php80-cgi || true');
